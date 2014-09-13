@@ -13,7 +13,8 @@ class CartsController < ApplicationController
   end
 
   def show
-    @order = Order.new
+    @order = OrderDecorator.new(Order.new)
+    @order_presenter = OrderPresenter.new(@order)
 
     session[:cart].each do |product_id, quantity|
       @order.line_items.build(
